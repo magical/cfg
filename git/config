@@ -1,0 +1,21 @@
+[user]
+	name = Andrew Ekstedt
+	email = andrew.ekstedt@gmail.com
+[color]
+	branch = auto
+	diff = auto
+	grep = auto
+	interactive = auto
+	status = auto
+[core]
+	askpass = 
+[alias]
+	st = status
+	di = diff
+	dc = diff --cached
+	ci = commit # check-in
+	co = checkout
+	pending = diff --cached
+	hist = log --all --graph --pretty=format:'[%C(cyan)%h%Creset]%C(bold cyan)%d%Creset %s'
+[push]
+	default = current

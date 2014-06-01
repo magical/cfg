@@ -1,0 +1,7 @@
+.*.swp
+.*.un~
+*.pyc
+tags
+
+*.gz
+*.7z

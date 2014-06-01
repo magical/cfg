@@ -1,0 +1,11 @@
+" see http://tlvince.com/vim-respect-xdg
+set runtimepath^=$XDG_CONFIG_HOME/vim runtimepath+=$XDG_CONFIG_HOME/vim/after
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+
+call pathogen#infect()
+"colorscheme solarized
+
+set noexpandtab
+set shiftwidth=8
+set list listchars=tab:>-
+
