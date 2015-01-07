@@ -1,11 +1,129 @@
-" see http://tlvince.com/vim-respect-xdg
+" Store config files in ~/cfg.
+" See http://tlvince.com/vim-respect-xdg.
 set runtimepath^=$XDG_CONFIG_HOME/vim runtimepath+=$XDG_CONFIG_HOME/vim/after
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 
 call pathogen#infect()
-"colorscheme solarized
 
-set noexpandtab
-set shiftwidth=8
-set list listchars=tab:>-
+""""""""
+" Options
 
+" Start with some decent defaults.
+set nocompatible
+
+" Read modelines.
+" Gentoo disables this by default.
+set modeline
+
+" Enable syntax highlighting.
+syntax on
+
+" Hard tabs are displayed as 8 spaces.
+set tabstop=8
+
+" Tab key inserts spaces.
+set expandtab
+
+" Tab key inserts 4 spaces.
+"set softtabstop=4
+
+" Shifting indents 4 spaces.
+set shiftwidth=4
+
+" Shifting aligns to a multiple of shiftwidth.
+set shiftround
+
+" Tab key at the beginning of a line inserts shiftwidth spaces.
+set smarttab
+
+" Always show the status line.
+set laststatus=2
+
+" Make tabs and non-breaking spaces visible.
+" Tabs will appear as >-------.
+" Non-breaking spaces will appear as a middle dot.
+set list
+set listchars=tab:>-,nbsp:·
+
+" Options for automatic formatting.
+" tc: wrap text and comments at textwidth
+" l: don't break lines that are already past textwidth
+" r: enter key inside comment inserts comment character
+" j: remove comment character when joining lines
+" q: let gq format comments
+set formatoptions=tcrqlj
+
+" Insert one space after a period when joining lines.
+set nojoinspaces
+
+" Recognize C-style and Python-style line comments, and bulleted lists.
+" Don't recognize multi-line C comments.
+set comments=://,b:#,fb:-
+
+" Nobody uses octal.
+set nrformats-=octal
+
+" Disable C indenting. Should be disabled by nocompatible.
+set nocindent
+
+" Copy indent from previous line.
+set autoindent
+
+" Search while typing.
+set incsearch
+
+" Highlight matches.
+set hlsearch
+
+" Don't write backup~ files.  I have real backups.
+set nobackup
+
+" But keep a copy during writes.
+set writebackup
+
+" Save undo history.
+set undofile
+
+""""""""
+" Mappings
+
+" Make navigating tabs easier.
+" ^P and ^N scroll through tabs.
+map <C-p> :tabprev<cr>
+map <C-n> :tabnext<cr>
+
+" Make Y yank to the end of the line,
+" for consistency with C and D.
+map Y y$
+
+" Make :W an alias for :w.
+" Common typo.
+command W write
+
+""""""""
+" Filetypes
+
+" Disable filetype plugin and filetype indent.
+filetype plugin off
+filetype indent off
+
+" But enable filetype detection.
+filetype on
+
+" Add some new filetypes.
+" And override some dumb default filetypes.
+autocmd filetypedetect BufNewFile,BufRead *.ll setlocal filetype=llvm
+autocmd filetypedetect BufNewFile,BufRead *.mako setlocal filetype=mako
+autocmd filetypedetect BufNewFile,BufRead *.md setlocal filetype=markdown
+
+" Enable go plugins.
+autocmd filetype go filetype plugin on
+
+" Use goimports.
+let g:go_fmt_command = "goimports"
+
+" Use hard tabs in C-based languages.
+autocmd filetype c setlocal noexpandtab shiftwidth=8
+autocmd filetype cpp setlocal noexpandtab shiftwidth=8
+autocmd filetype go setlocal noexpandtab shiftwidth=8
+autocmd filetype javascript setlocal noexpandtab shiftwidth=8
