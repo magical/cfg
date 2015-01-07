@@ -122,6 +122,9 @@ autocmd filetype go filetype plugin on
 " Use goimports.
 let g:go_fmt_command = "goimports"
 
+" Disable modelines in git commit messages.
+autocmd BufRead */COMMIT_EDITMSG setlocal nomodeline
+
 " Use hard tabs in C-based languages.
 autocmd filetype c setlocal noexpandtab shiftwidth=8
 autocmd filetype cpp setlocal noexpandtab shiftwidth=8
