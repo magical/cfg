@@ -1,0 +1,7 @@
+export EDITOR=vim
+export GOPATH=$HOME/go
+export LESSHISTFILE=$HOME/var/less/history
+export VIMINIT='let $MYVIMRC="$HOME/cfg/vim/vimrc" | source $MYVIMRC'
+export XDG_CONFIG_HOME=$HOME/cfg
+export XDG_CACHE_HOME=$HOME/var/cache
+export XDG_DATA_HOME=$HOME/var

@@ -1,0 +1,137 @@
+bindkey -e
+
+# Keep and read 1e5 lines of history. Append to the history file immediately
+# after each command, instead of when the shell exits. Don't store repeated
+# lines.
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE=$HOME/var/zsh/history
+setopt incappendhistory
+setopt histignoredups
+
+# Print times if a command takes more than 10 seconds
+REPORTTIME=10
+# Print exit status if non-zero
+setopt printexitvalue
+
+# PATH has to be set here, not .zshenv, or it will be overwritten by
+# /etc/profile
+PATH=$PATH:$HOME/bin:$HOME/go/bin
+
+# Set LS_COLORS
+if [ -f $HOME/cfg/dircolors ]; then
+	eval `dircolors -b $HOME/cfg/dircolors`
+fi
+
+# LS: color, all, escape, classify, version sort, SI units
+alias ls='ls --color -AbFv --si'
+# Aliases for ls
+alias l='ls' # ls is a pain to type on dvorak
+alias lh='l --ignore="[!.]*"' 
+alias lt='ll -t'
+function ll () {
+	if [ -t 1 ]; then
+		ls -lFA --color "$@" | $PAGER
+	else
+		ls -lFA "$@"
+	fi
+}
+
+# Some conveniences
+function p() {
+	if [ -f "$1" ]; then
+		$PAGER "$1"
+	else
+		l "$1"
+	fi
+}
+
+function e() {
+	if [[ -n $DISPLAY ]]; then
+		$XEDITOR "$@"
+	else
+		$EDITOR "$@"
+	fi
+}
+
+alias j=jobs
+
+# List files after changing directory.
+function cd() {
+	builtin cd "$@" && l
+}
+
+alias qcd='builtin cd' # quiet cd
+
+function mkcd() {
+	mkdir "$1" && cd "$1"
+}
+
+# Make these less dangerous
+# Also let rm delete empty directories
+alias rm='rm -I --dir --one-file-system --preserve-root'
+alias cp='cp -i'
+alias mv='mv -i'
+alias ln='ln -i'
+
+# Use SI units
+alias df='df --si'
+alias du='du --si'
+
+# Never have i ever actually wanted to run fc.
+disable fc
+
+# Some sane defaults for sshfs
+alias sshfs='sshfs -o idmap=user,follow_symlinks,allow_root'
+
+function title() {
+	case $TERM in
+	screen|screen-*)
+		print -n "\ek${(q)1}\e\\"
+		;;
+	xterm|xterm-*|rxvt-*|st|st-*)
+		print -n "\e]0;$USER@$HOST ${(q)1}\a"
+		;;
+	esac
+}
+
+function precmd() {
+	title "${PWD/$HOME/~}"
+}
+
+function preexec() {
+	set -A cmd ${(z)2}
+	local n
+	case $cmd[1] in
+	fg|bg)
+		shift cmd
+		[[ -n $cmd[1] ]] || set -A cmd %%
+		;& # fall through
+	%*)
+		# This case statement emulates jobs.c:getjob()
+		#
+		# See also:
+		#   * /usr/share/zsh/functions/5.0.5/Misc/getjobs
+		#   * http://www.zsh.org/mla/workers/2000/msg03988.html
+		#   * http://zshwiki.org/home/examples/hardstatus
+		case $cmd[1] in
+			[\;\&\|]|\|\||\&\&) break ;;
+			%(|[%+])) n=${(k)jobstates[(r)*:+:*]} ;;
+			%-) n=${(k)jobstates[(r)*:-:*]} ;;
+			%<->) n=${cmd[1]#%} ;;
+			%[?]*) n=${${(Ok)jobtexts[(R)*${cmd[1]#%[?]}*]}[1]} ;;
+			*) n=${${(Ok)jobtexts[(R)${cmd[1]}*]}[1]} ;;
+		esac
+		[[ -n $n ]] && texts=($texts ${jobtexts[$n]})
+		title $jobtexts[$n]
+		;;
+	*)
+		title $2
+		;;
+	esac
+}
+
+
+# Start keychain. The . in the middle of dir is to keep it from appending
+# .keychain
+eval `keychain --quiet --dir $HOME/var/./keychain --eval id_rsa`
