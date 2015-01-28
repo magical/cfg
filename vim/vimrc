@@ -3,6 +3,9 @@
 set runtimepath^=$XDG_CONFIG_HOME/vim runtimepath+=$XDG_CONFIG_HOME/vim/after
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 
+" I like to run fish but vim needs a POSIX-compatible shell.
+set shell=/bin/bash
+
 call pathogen#infect()
 
 """"""""
