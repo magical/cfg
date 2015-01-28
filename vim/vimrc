@@ -130,3 +130,9 @@ autocmd filetype c setlocal noexpandtab shiftwidth=8
 autocmd filetype cpp setlocal noexpandtab shiftwidth=8
 autocmd filetype go setlocal noexpandtab shiftwidth=8
 autocmd filetype javascript setlocal noexpandtab shiftwidth=8
+
+""""""""
+" Colors
+
+" In HTML, don't stylize the contents of <em> and <a> and the like.
+let g:html_no_rendering = 1
