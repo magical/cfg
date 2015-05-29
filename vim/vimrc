@@ -137,5 +137,10 @@ autocmd filetype javascript setlocal noexpandtab shiftwidth=8
 """"""""
 " Colors
 
+highlight link pythonImport Keyword
+highlight link pythonFunction Normal
+highlight link pythonDecorator Normal
+highlight link pythonDottedName Normal
+
 " In HTML, don't stylize the contents of <em> and <a> and the like.
 let g:html_no_rendering = 1
