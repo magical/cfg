@@ -88,10 +88,11 @@ alias sshfs='sshfs -o idmap=user,follow_symlinks,allow_root'
 function title() {
 	case $TERM in
 	screen|screen-*)
-		print -n "\ek${(q)1}\e\\"
+		print -n "\e]0;${(q)1}\a"
 		;;
 	xterm|xterm-*|rxvt-*|st|st-*)
-		print -n "\e]0;$USER@$HOST ${(q)1}\a"
+		print -n "\e]1;${(q)1}\a"
+		print -n "\e]2;$USER@$HOST ${(q)1}\a"
 		;;
 	esac
 }

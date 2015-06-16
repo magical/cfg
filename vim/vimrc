@@ -87,6 +87,10 @@ set writebackup
 " Save undo history.
 set undofile
 
+" Titles
+set title
+set titleold=
+
 """"""""
 " Mappings
 
