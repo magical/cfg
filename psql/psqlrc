@@ -1,0 +1,6 @@
+\set QUIET 1
+\timing on
+\set HISTFILE ~/var/psql/history
+\pset null ␀
+\pset linestyle unicode
+\unset QUIET
