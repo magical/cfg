@@ -123,7 +123,7 @@ autocmd filetypedetect BufNewFile,BufRead *.md setlocal filetype=markdown
 autocmd filetype go filetype plugin on
 
 " Use goimports.
-let g:go_fmt_command = "goimports"
+let g:gofmt_command = "goimports"
 
 " Disable modelines in git commit messages.
 autocmd BufRead */COMMIT_EDITMSG setlocal nomodeline
