@@ -17,6 +17,7 @@ setopt printexitvalue
 # PATH has to be set here, not .zshenv, or it will be overwritten by
 # /etc/profile
 PATH=$PATH:$HOME/bin:$HOME/go/bin
+PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
 
 # Set LS_COLORS
 if [ -f $HOME/cfg/dircolors ]; then
