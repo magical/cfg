@@ -15,7 +15,7 @@ call pathogen#infect()
 set nocompatible
 
 " Read modelines.
-" Gentoo disables this by default.
+" (Gentoo disables this by default.)
 set modeline
 
 " Enable syntax highlighting.
@@ -90,6 +90,9 @@ set undofile
 " Titles
 set title
 set titleold=
+
+" Easy toggle for paste mode
+set pastetoggle=<F2>
 
 """"""""
 " Mappings
