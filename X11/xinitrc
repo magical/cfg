@@ -1,0 +1,3 @@
+setxkbmap dvorak &&
+
+exec /usr/bin/dwm
