@@ -1,72 +1,83 @@
-bindkey -e
+### Key bindings
 
-# Keep and read 1e5 lines of history. Append to the history file immediately
-# after each command, instead of when the shell exits. Don't store repeated
-# lines.
-HISTSIZE=100000
-SAVEHIST=100000
+bindkey -e # emacs key bindings
+
+### History
+
 HISTFILE=$HOME/var/zsh/history
+
+# Keep and read 1e5 lines of history.
+SAVEHIST=100000
+HISTSIZE=100000
+
+# Append to the history file immediately after each command,
+# instead of when the shell exits.
 setopt incappendhistory
+
+# Don't store repeated lines.
 setopt histignoredups
+
+### Reporting
 
 # Print times if a command takes more than 10 seconds
 REPORTTIME=10
+
 # Print exit status if non-zero
 setopt printexitvalue
 
-# PATH has to be set here, not .zshenv, or it will be overwritten by
-# /etc/profile
+### Path
+# Have to set PATH here rather than .zshenv or it will be
+# overwritten by /etc/profile
+
 PATH=$PATH:$HOME/bin:$HOME/go/bin
 PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
+
+### Aliases
+
+# Basic ls options: all, escape, classify, version sort, SI units, color
+function ls { command ls -AbFv --si --color=auto "$@" }
+
+# Long options: long, all, classify, version sort, SI units, color
+# Run through the pager
+function ll { command ls -l -AFv --si --color=always "$@" | $PAGER }
+
+alias lh='ls --ignore="[!.]*"' # list dotfiles
+alias lt='ll -t' # sort by time
 
 # Set LS_COLORS
 if [ -f $HOME/cfg/dircolors ]; then
 	eval `dircolors -b $HOME/cfg/dircolors`
 fi
 
-# LS: color, all, escape, classify, version sort, SI units
-alias ls='ls --color -AbFv --si'
-# Aliases for ls
-alias l='ls' # ls is a pain to type on dvorak
-alias lh='l --ignore="[!.]*"' 
-alias lt='ll -t'
-function ll () {
-	if [ -t 1 ]; then
-		ls -lFA --color "$@" | $PAGER
-	else
-		ls -lFA "$@"
-	fi
-}
-
 # Some conveniences
-function p() {
+# l = ls
+# p = $pager or ls
+# e = $editor
+# j = jobs
+
+alias l=ls # pain to type on dvorak
+alias j=jobs
+
+function p {
 	if [ -f "$1" ]; then
 		$PAGER "$1"
 	else
-		l "$1"
+		ls "$1"
 	fi
 }
 
-function e() {
-	if [[ -n $DISPLAY ]]; then
+function e {
+	if [[ -n $DISPLAY && -n $XEDITOR ]]; then
 		$XEDITOR "$@"
 	else
 		$EDITOR "$@"
 	fi
 }
 
-alias j=jobs
-
 # List files after changing directory.
-function cd() {
-	builtin cd "$@" && l
-}
-
-alias qcd='builtin cd' # quiet cd
-
-function mkcd() {
-	mkdir "$1" && cd "$1"
-}
+function cd { builtin cd "$@" && ls }
+function qcd { builtin cd } # quiet cd
+function mkcd { mkdir "$1" && cd "$1" }
 
 # Make these less dangerous
 # Also let rm delete empty directories
@@ -79,11 +90,18 @@ alias ln='ln -i'
 alias df='df --si'
 alias du='du --si'
 
+# Some sane defaults for sshfs
+alias sshfs='sshfs -o idmap=user,follow_symlinks,allow_root'
+
 # Never have i ever actually wanted to run fc.
 disable fc
 
-# Some sane defaults for sshfs
-alias sshfs='sshfs -o idmap=user,follow_symlinks,allow_root'
+### XDG support
+
+function tmux { command tmux -f "$XDG_CONFIG_HOME/tmux/tmux.conf" }
+function mocp { command mocp -M "$XDG_CONFIG_HOME/moc" }
+
+### Window titles
 
 function title() {
 	case $TERM in
@@ -97,10 +115,12 @@ function title() {
 	esac
 }
 
+# Set title to current directory when not running a command
 function precmd() {
 	title "${PWD/$HOME/~}"
 }
 
+# Set title to command when running a command
 function preexec() {
 	set -A cmd ${(z)2}
 	local n
@@ -133,7 +153,8 @@ function preexec() {
 	esac
 }
 
+### Keychain
 
-# Start keychain. The . in the middle of dir is to keep it from appending
-# .keychain
+# Start keychain.
+# The . in the middle of the path is to keep it from appending .keychain
 eval `keychain --quiet --dir $HOME/var/./keychain --eval id_rsa`
