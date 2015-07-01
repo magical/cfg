@@ -94,7 +94,9 @@ alias du='du --si'
 alias sshfs='sshfs -o idmap=user,follow_symlinks,allow_root'
 
 # Never have i ever actually wanted to run fc.
+# R is an alias for 'fc -e -' and is much to close to l.
 disable fc
+disable r
 
 ### XDG support
 
