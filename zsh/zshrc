@@ -98,8 +98,8 @@ disable fc
 
 ### XDG support
 
-function tmux { command tmux -f "$XDG_CONFIG_HOME/tmux/tmux.conf" }
-function mocp { command mocp -M "$XDG_CONFIG_HOME/moc" }
+function tmux { command tmux -f "$XDG_CONFIG_HOME/tmux/tmux.conf" "$@" }
+function mocp { command mocp -M "$XDG_CONFIG_HOME/moc" "$@" }
 
 ### Window titles
 
