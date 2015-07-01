@@ -49,6 +49,8 @@ STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 .xz 31
 .zip 31
 
-# Swap files
-.swp 38;5;244
-.un~ 38;5;244
+# Cache and object files
+.swp 38;5;244 # vim swap files
+.un~ 38;5;244 # vim undo files
+.o  38;5;244 # c object files
+.pyc 38;5;244 # Python cache files
