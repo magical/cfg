@@ -39,15 +39,15 @@ OTHER_WRITABLE 01;37;42 # dir that is other-writable (o+w) and not sticky
 STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 
 # Archives and compressed files
-.7z 31
-.bz2 31
-.cpio 31
-.gz 31
-.rar 31
-.tar 31
-.tgz 31
-.xz 31
-.zip 31
+.7z 32
+.bz2 32
+.cpio 32
+.gz 32
+.rar 32
+.tar 32
+.tgz 32
+.xz 32
+.zip 32
 
 # Cache and object files
 .swp 38;5;244 # vim swap files
