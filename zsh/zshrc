@@ -32,6 +32,11 @@ setopt printexitvalue
 PATH=$PATH:$HOME/bin:$HOME/go/bin
 PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
 
+### Help
+unalias run-help
+autoload run-help
+alias help=run-help
+
 ### Aliases
 
 # Basic ls options: all, escape, classify, version sort, SI units, color
@@ -40,6 +45,9 @@ function ls { command ls -AbFv --si --color=auto "$@" }
 # Long options: long, all, classify, version sort, SI units, color
 # Run through the pager
 function ll { command ls -l -AFv --si --color=always "$@" | $PAGER }
+
+# Tree: color, classify
+function tree { command tree -CF "$@" }
 
 alias lh='ls --ignore="[!.]*"' # list dotfiles
 alias lt='ll -t' # sort by time
@@ -94,7 +102,7 @@ alias du='du --si'
 alias sshfs='sshfs -o idmap=user,follow_symlinks,allow_root'
 
 # Never have i ever actually wanted to run fc.
-# R is an alias for 'fc -e -' and is much to close to l.
+# R is an alias for 'fc -e -' and is much too close to l.
 disable fc
 disable r
 
