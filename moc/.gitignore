@@ -1,0 +1,6 @@
+*
+!config
+!themes
+!themes/*
+!keymap
+!.gitignore
