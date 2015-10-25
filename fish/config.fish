@@ -18,6 +18,7 @@ set -x DVDCSS_CACHE $XDG_CACHE_HOME/dvdcss
 set -x LESSHISTFILE $XDG_DATA_HOME/less/history
 set -x GNUPGHOME $XDG_CONFIG_HOME/gnupg
 set -x PSQLRC $XDG_CONFIG_HOME/psql/psqlrc
+set -x XCOMPOSEFILE $XDG_CONFIG_HOME/X11/xcompose
 set -x XINITRC $XDG_CONFIG_HOME/X11/xinitrc
 
 set -e CMD_DURATION
