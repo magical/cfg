@@ -137,6 +137,9 @@ autocmd filetypedetect BufNewFile,BufRead *.md setlocal filetype=markdown
 autocmd filetype go filetype plugin on
 let g:gofmt_command = "goimports"
 
+" Enable :Man
+runtime ftplugin/man.vim
+
 " Disable modelines in git commit messages.
 " Limit width to 72 charaters.
 autocmd BufRead COMMIT_EDITMSG setlocal nomodeline textwidth=72
