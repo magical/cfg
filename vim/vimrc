@@ -116,6 +116,8 @@ map Y y$
 " Common typo.
 command W write
 
+let g:ctrlp_map = '<C-t>'
+
 """"""""
 " Filetypes
 
