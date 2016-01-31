@@ -32,6 +32,8 @@ setopt printexitvalue
 PATH=$PATH:$HOME/bin:$HOME/go/bin
 PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
 
+MANPATH=$MANPATH:$HOME/share/man
+
 ### Help
 unalias run-help
 autoload run-help

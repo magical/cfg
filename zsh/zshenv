@@ -1,6 +1,7 @@
 export EDITOR=vim
 export PAGER=less
 export GOPATH=$HOME/go
+export LD_LIBRARY_PATH=$HOME/local/lib
 export XDG_CONFIG_HOME=$HOME/cfg
 export XDG_CACHE_HOME=$HOME/var/cache
 export XDG_DATA_HOME=$HOME/var
