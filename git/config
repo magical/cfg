@@ -19,3 +19,5 @@
 	hist = log --all --graph --pretty=format:'[%C(cyan)%h%Creset]%C(bold cyan)%d%Creset %s'
 [push]
 	default = current
+[http]
+	cookiefile = /home/andrew/var/git/cookies
