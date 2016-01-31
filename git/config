@@ -21,3 +21,5 @@
 	default = current
 [http]
 	cookiefile = /home/andrew/var/git/cookies
+[transfer]
+	fsckObjects = true
