@@ -48,6 +48,9 @@ set smarttab
 " Always show the status line.
 set laststatus=2
 
+" Show a line at the 80-character mark
+set colorcolumn=80
+
 " Make tabs and non-breaking spaces visible.
 " Tabs will appear as »‐‐‐‐‐‐‐.
 " Non-breaking spaces will appear as a middle dot.
