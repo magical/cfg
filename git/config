@@ -17,6 +17,8 @@
 	status = auto
 [core]
 	askpass = 
+[grep]
+	lineNumber = true
 [http]
 	cookiefile = /home/andrew/var/git/cookies
 [push]
