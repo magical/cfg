@@ -1,6 +1,14 @@
 [user]
 	name = Andrew Ekstedt
 	email = andrew.ekstedt@gmail.com
+[alias]
+	ci = commit
+	co = checkout
+	dc = diff --cached
+	di = diff
+	hist = log --all --graph --pretty=format:'[%C(cyan)%h%Creset]%C(bold cyan)%d%Creset %s'
+	pending = diff --cached
+	st = status
 [color]
 	branch = auto
 	diff = auto
@@ -9,17 +17,9 @@
 	status = auto
 [core]
 	askpass = 
-[alias]
-	st = status
-	di = diff
-	dc = diff --cached
-	ci = commit # check-in
-	co = checkout
-	pending = diff --cached
-	hist = log --all --graph --pretty=format:'[%C(cyan)%h%Creset]%C(bold cyan)%d%Creset %s'
-[push]
-	default = current
 [http]
 	cookiefile = /home/andrew/var/git/cookies
+[push]
+	default = current
 [transfer]
 	fsckObjects = true
