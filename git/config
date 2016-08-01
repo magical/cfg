@@ -9,6 +9,7 @@
 	hist = log --all --graph --pretty=format:'[%C(cyan)%h%Creset]%C(bold cyan)%d%Creset %s'
 	pending = diff --cached
 	st = status
+	up = pull --ff-only
 [color]
 	branch = auto
 	diff = auto
