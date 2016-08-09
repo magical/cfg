@@ -118,17 +118,18 @@ map Y y$
 " Common typo.
 command W write
 
+" Map ctrlp to ^T
 let g:ctrlp_map = '<C-t>'
 
 """"""""
 " Filetypes
 
-" Disable filetype plugin and filetype indent.
+" Enable filetype detection.
+filetype on
+
+" But disable filetype plugin and filetype indent.
 filetype plugin off
 filetype indent off
-
-" But enable filetype detection.
-filetype on
 
 " Add some new filetypes.
 " And override some dumb default filetypes.
@@ -138,10 +139,9 @@ autocmd filetypedetect BufNewFile,BufRead *.mako setlocal filetype=mako
 autocmd filetypedetect BufNewFile,BufRead *.md setlocal filetype=markdown
 autocmd filetypedetect BufNewFile,BufRead Vagrantfile setlocal filetype=ruby
 
-" Enable go plugins.
-" Use goimports.
-autocmd filetype go filetype plugin on
-let g:gofmt_command = "goimports"
+" Auto-format Go code on save
+let g:go_fmt_command = "goimports"
+autocmd BufWritePre *.go call go#fmt#Format(-1)
 
 " Enable :Man
 runtime ftplugin/man.vim
