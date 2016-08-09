@@ -156,6 +156,9 @@ autocmd filetype cpp setlocal noexpandtab shiftwidth=8
 autocmd filetype go setlocal noexpandtab shiftwidth=8
 autocmd filetype javascript setlocal noexpandtab shiftwidth=8
 
+" Use 2-space indents in yaml
+autocmd filetype yaml setlocal expandtab shiftwidth=2
+
 """"""""
 " Colors
 
