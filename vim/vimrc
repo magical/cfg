@@ -107,16 +107,23 @@ set pastetoggle=<F2>
 
 " Make navigating tabs easier.
 " ^P and ^N scroll through tabs.
-map <C-p> :tabprev<cr>
-map <C-n> :tabnext<cr>
+noremap <C-p> :tabprev<cr>
+noremap <C-n> :tabnext<cr>
 
 " Make Y yank to the end of the line,
 " for consistency with C and D.
-map Y y$
+noremap Y y$
 
-" Make :W an alias for :w.
+" Get rid of Q, which enters ex mode,
+" something i've never done on purpose
+nnoremap Q <Nop>
+nnoremap gQ gq
+
+" Make :W an alias for :w
+" and :Q an alias for :q
 " Common typo.
 command W write
+command Q quit
 
 " Map ctrlp to ^T
 let g:ctrlp_map = '<C-t>'
