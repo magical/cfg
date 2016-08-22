@@ -175,10 +175,6 @@ stty -ixon
 # messing up the terminal after crashing
 ttyctl -f
 
-### Keychain
-
-# Start keychain.
-# The . in the middle of the path is to keep it from appending .keychain
-eval `keychain --quiet --dir $HOME/var/./keychain --eval id_rsa`
+### Local overrides
 
 test -e $HOME/cfg/zsh/local && source $HOME/cfg/zsh/local
