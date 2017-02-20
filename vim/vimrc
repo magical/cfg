@@ -128,6 +128,18 @@ command Q quit
 " Map ctrlp to ^T
 let g:ctrlp_map = '<C-t>'
 
+" Make <F5> toggle the background
+function ToggleBackground()
+    let &background = ( &background == "dark"? "light" : "dark" )
+    if exists("g:colors_name")
+        exe "colorscheme " . g:colors_name
+    endif
+endfunction
+
+noremap <F5> :call ToggleBackground()<CR>
+inoremap <F5> <C-\><C-O>:call ToggleBackground()<CR>
+vnoremap <F5> <ESC>:call ToggleBackground()<CR>gv
+
 """"""""
 " Filetypes
 
