@@ -169,11 +169,13 @@ runtime ftplugin/man.vim
 " Limit width to 72 charaters.
 autocmd BufRead COMMIT_EDITMSG setlocal nomodeline textwidth=72
 
-" Use hard tabs in C-based languages.
+" Use hard tabs in C-based languages
+" and Makefiles
 autocmd filetype c setlocal noexpandtab shiftwidth=8
 autocmd filetype cpp setlocal noexpandtab shiftwidth=8
 autocmd filetype go setlocal noexpandtab shiftwidth=8
 autocmd filetype javascript setlocal noexpandtab shiftwidth=8
+autocmd filetype make setlocal noexpandtab shiftwidth=8
 
 " Use 2-space indents in yaml
 autocmd filetype yaml setlocal expandtab shiftwidth=2
