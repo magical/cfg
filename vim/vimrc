@@ -140,6 +140,9 @@ noremap <F5> :call ToggleBackground()<CR>
 inoremap <F5> <C-\><C-O>:call ToggleBackground()<CR>
 vnoremap <F5> <ESC>:call ToggleBackground()<CR>gv
 
+" :Trim strips trailing whitespace from all lines
+command Trim %substitute/\s\+$//
+
 """"""""
 " Filetypes
 
@@ -190,3 +193,11 @@ highlight link pythonDottedName Normal
 
 " In HTML, don't stylize the contents of <em> and <a> and the like.
 let g:html_no_rendering = 1
+
+" Highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
