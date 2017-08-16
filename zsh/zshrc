@@ -91,7 +91,7 @@ function e {
 
 # List files after changing directory.
 function cd { builtin cd "$@" && ls }
-function qcd { builtin cd } # quiet cd
+function qcd { builtin cd "$@" } # quiet cd
 function mkcd { mkdir "$1" && cd "$1" }
 
 # Make these less dangerous
