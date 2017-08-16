@@ -52,9 +52,9 @@ set laststatus=2
 set colorcolumn=80
 
 " Make tabs and non-breaking spaces visible.
-" Tabs will appear as »‐‐‐‐‐‐‐.
+" Tabs will appear as »-------.
 " Non-breaking spaces will appear as a middle dot.
-set list listchars=tab:»‐,nbsp:·
+set list listchars=tab:»-,nbsp:·
 
 " Options for automatic formatting.
 " tc: wrap text and comments at textwidth
