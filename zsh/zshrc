@@ -73,6 +73,7 @@ fi
 # j = jobs
 
 alias l=ls # pain to type on dvorak
+alias /=ls # right next to l
 alias j=jobs
 
 function p {
