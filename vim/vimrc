@@ -125,6 +125,11 @@ nnoremap gQ gq
 command W write
 command Q quit
 
+" ^S saves
+noremap <C-s> :update<CR>
+inoremap <C-s> <C-\><C-O>:update<CR>
+vnoremap <C-s> <ESC>:update<CR>gv
+
 " Map ctrlp to ^T
 let g:ctrlp_map = '<C-t>'
 
