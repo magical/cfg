@@ -6,6 +6,7 @@
 	co = checkout
 	dc = diff --cached
 	di = diff
+	git = !git
 	graph = log --all --graph --pretty=format:'[%C(cyan)%h%Creset]%C(bold cyan)%d%Creset %s'
 	st = status
 	up = pull --ff-only
