@@ -173,6 +173,9 @@ autocmd BufWritePre *.go call go#fmt#Format(-1)
 " Enable :Man
 runtime ftplugin/man.vim
 
+" Enable vimwiki ftplugin
+autocmd filetype vimwiki runtime ftplugin/vimwiki.vim
+
 " Disable modelines in git commit messages.
 " Limit width to 72 charaters.
 autocmd BufRead COMMIT_EDITMSG setlocal nomodeline textwidth=72
