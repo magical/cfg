@@ -77,7 +77,9 @@ alias /=ls # right next to l
 alias j=jobs
 
 function p {
-	if [ -f "$1" ]; then
+	if [[ -z "$1" ]]; then
+		$PAGER
+	elif test -f "$1"; then
 		$PAGER "$1"
 	else
 		ls "$1"
