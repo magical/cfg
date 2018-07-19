@@ -19,6 +19,8 @@ call pathogen#infect()
 
 " Start with some decent defaults.
 set nocompatible
+set backspace=2 " backspace over newlines
+set ruler       " show current position in status line
 
 " Read modelines.
 " (Gentoo disables this by default.)
