@@ -18,9 +18,11 @@ call pathogen#infect()
 " Options
 
 " Start with some decent defaults.
+" This has to be before almost anything else because setting it resets a bunch of options.
 set nocompatible
-set backspace=2 " backspace over newlines
-set ruler       " show current position in status line
+
+" Can backspace over newlines
+set backspace=2
 
 " Read modelines.
 " (Gentoo disables this by default.)
@@ -29,26 +31,19 @@ set modeline
 " Enable syntax highlighting.
 syntax on
 
-" Hard tabs are displayed as 8 spaces.
-set tabstop=8
-
-" Tab key inserts spaces.
-set expandtab
-
-" Tab key inserts 4 spaces.
-"set softtabstop=4
-
-" Shifting indents 4 spaces.
-set shiftwidth=4
-
-" Shifting aligns to a multiple of shiftwidth.
-set shiftround
-
-" Tab key at the beginning of a line inserts shiftwidth spaces.
-set smarttab
+" Tabs and spaces
+set tabstop=8           " Hard tabs are displayed as 8 spaces.
+set expandtab           " Tab key inserts spaces.
+"set softtabstop=4      " Tab key inserts 4 spaces.
+set shiftwidth=4        " Shifting indents 4 spaces.
+set shiftround          " Shifting aligns to a multiple of shiftwidth.
+set smarttab " Tab key at the beginning of a line inserts shiftwidth spaces.
 
 " Always show the status line.
 set laststatus=2
+
+" Show current position in status line.
+set ruler
 
 " Show a line at the 80-character mark
 set colorcolumn=80
@@ -82,20 +77,15 @@ set nocindent
 " Copy indent from previous line.
 set autoindent
 
-" Search while typing.
-set incsearch
+" Searching
+set incsearch   " Search while typing.
+set hlsearch    " Highlight matches.
 
-" Highlight matches.
-set hlsearch
+" Backup / undo
+set nobackup    " Don't write backup~ files; I have real backups.
+set writebackup " But keep a copy during writes.
 
-" Don't write backup~ files.  I have real backups.
-set nobackup
-
-" But keep a copy during writes.
-set writebackup
-
-" Save undo history.
-set undofile
+set undofile    " Save undo history.
 
 " Titles
 set title
