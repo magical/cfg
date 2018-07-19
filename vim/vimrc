@@ -214,3 +214,12 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
+if has('gui_running')
+    " better font and color choices
+    set guifont=Go\ Mono\ 10
+    colorscheme solarized
+
+    " no toolbar
+    set toolbar=
+end
