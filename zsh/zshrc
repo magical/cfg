@@ -36,10 +36,10 @@ setopt printexitvalue
 # Have to set PATH here rather than .zshenv or it will be
 # overwritten by /etc/profile
 
-PATH=$PATH:$HOME/bin:$HOME/go/bin
-PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
+path+=(~/bin ~/go/bin)
+path+=(/usr/local/sbin /usr/sbin /sbin)
 
-MANPATH=$MANPATH:$HOME/share/man
+manpath+=(~/share/man)
 
 ### Help
 unalias run-help
