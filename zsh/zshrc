@@ -110,6 +110,10 @@ alias ln='ln -i'
 alias df='df --si'
 alias du='du --si'
 
+# Use extended regular expressions
+alias grep='grep -E'
+alias sed='sed --regexp-extended'
+
 # Some sane defaults for sshfs
 alias sshfs='sshfs -o idmap=user,follow_symlinks,allow_root'
 
