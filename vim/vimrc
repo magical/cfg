@@ -91,7 +91,7 @@ set title
 set titleold=
 
 " Easy toggle for paste mode
-set pastetoggle=<F2>
+set pastetoggle=<F3>
 
 " Make viminfo path respect XDG.
 " This has to be after nocompatible.
@@ -153,6 +153,21 @@ vnoremap <F5> <ESC>:call ToggleBackground()<CR>gv
 
 " :Trim strips trailing whitespace from all lines
 command Trim %substitute/\s\+$//
+
+" Handy keys for setting the tabstop
+" to 2 spaces, 4 spaces, or hard tabs
+noremap <F2> :set sw=2 et<CR>
+inoremap <F2> <C-\><C-O>:set sw=2 et<CR>
+vnoremap <F2> <ESC>:set sw=2 et<CR>gv
+
+noremap <F4> :set sw=4 et<CR>
+inoremap <F4> <C-\><C-O>:set sw=4 et<CR>
+vnoremap <F4> <ESC>:set sw=4 et<CR>gv
+
+noremap <F8> :set sw=8 et<CR>
+inoremap <F8> <C-\><C-O>:set sw=8 noet<CR>
+vnoremap <F8> <ESC>:set sw=8 noet<CR>gv
+
 
 """"""""
 " Filetypes
