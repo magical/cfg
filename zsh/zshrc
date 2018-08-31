@@ -32,6 +32,12 @@ REPORTTIME=10
 # Print exit status if non-zero
 setopt printexitvalue
 
+### Other options
+
+setopt interactivecomments # allow comments in interactive shells
+setopt autocontinue # resume disowned jobs
+setopt notify # report job status immediately
+
 ### Path
 # Have to set PATH here rather than .zshenv or it will be
 # overwritten by /etc/profile
