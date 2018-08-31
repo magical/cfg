@@ -129,6 +129,16 @@ vnoremap <C-s> <ESC>:update<CR>gv
 " Map ctrlp to ^T
 let g:ctrlp_map = '<C-t>'
 
+" Make F1 exit from help instead of entering it
+noremap <F1> :call MapF1()<CR>
+inoremap <F1> <Nop>
+
+function MapF1()
+  if &buftype == "help"
+    quit
+  endif
+endfunction
+
 " Make <F5> toggle the background
 function ToggleBackground()
     let &background = ( &background == "dark"? "light" : "dark" )
