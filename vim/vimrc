@@ -160,6 +160,7 @@ autocmd filetypedetect BufNewFile,BufRead *.coffee setlocal filetype=coffee
 autocmd filetypedetect BufNewFile,BufRead *.ll setlocal filetype=llvm
 autocmd filetypedetect BufNewFile,BufRead *.mako setlocal filetype=mako
 autocmd filetypedetect BufNewFile,BufRead *.md setlocal filetype=markdown
+autocmd filetypedetect BufNewFile,BufRead go.mod setlocal filetype=gomod
 autocmd filetypedetect BufNewFile,BufRead Vagrantfile setlocal filetype=ruby
 
 " Auto-format Go code on save
