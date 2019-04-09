@@ -111,6 +111,7 @@ alias rm='rm -I --dir --one-file-system --preserve-root'
 alias cp='cp -i'
 alias mv='mv -i'
 alias ln='ln -i'
+alias sox='sox --no-clobber'
 
 # Use SI units
 alias df='df --si'
