@@ -4,7 +4,6 @@
 " Store config files in ~/cfg.
 " See http://tlvince.com/vim-respect-xdg.
 set runtimepath^=$XDG_CONFIG_HOME/vim runtimepath+=$XDG_CONFIG_HOME/vim/after
-set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 
 " I like to run fish but vim needs a POSIX-compatible shell.
 set shell=/bin/bash
@@ -18,7 +17,11 @@ call pathogen#infect()
 " Options
 
 " Start with some decent defaults.
+" This has to be before almost anything else because setting it resets a bunch of options.
 set nocompatible
+
+" Can backspace over newlines
+set backspace=2
 
 " Read modelines.
 " (Gentoo disables this by default.)
@@ -27,26 +30,19 @@ set modeline
 " Enable syntax highlighting.
 syntax on
 
-" Hard tabs are displayed as 8 spaces.
-set tabstop=8
-
-" Tab key inserts spaces.
-set expandtab
-
-" Tab key inserts 4 spaces.
-"set softtabstop=4
-
-" Shifting indents 4 spaces.
-set shiftwidth=4
-
-" Shifting aligns to a multiple of shiftwidth.
-set shiftround
-
-" Tab key at the beginning of a line inserts shiftwidth spaces.
-set smarttab
+" Tabs and spaces
+set tabstop=8           " Hard tabs are displayed as 8 spaces.
+set expandtab           " Tab key inserts spaces.
+"set softtabstop=4      " Tab key inserts 4 spaces.
+set shiftwidth=4        " Shifting indents 4 spaces.
+set shiftround          " Shifting aligns to a multiple of shiftwidth.
+set smarttab " Tab key at the beginning of a line inserts shiftwidth spaces.
 
 " Always show the status line.
 set laststatus=2
+
+" Show current position in status line.
+set ruler
 
 " Show a line at the 80-character mark
 set colorcolumn=80
@@ -80,27 +76,27 @@ set nocindent
 " Copy indent from previous line.
 set autoindent
 
-" Search while typing.
-set incsearch
+" Searching
+set incsearch   " Search while typing.
+set hlsearch    " Highlight matches.
 
-" Highlight matches.
-set hlsearch
+" Backup / undo
+set nobackup    " Don't write backup~ files; I have real backups.
+set writebackup " But keep a copy during writes.
 
-" Don't write backup~ files.  I have real backups.
-set nobackup
-
-" But keep a copy during writes.
-set writebackup
-
-" Save undo history.
-set undofile
+set undofile    " Save undo history.
 
 " Titles
 set title
 set titleold=
 
 " Easy toggle for paste mode
-set pastetoggle=<F2>
+set pastetoggle=<F3>
+
+" Make viminfo path respect XDG.
+" This has to be after nocompatible.
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+
 
 """"""""
 " Mappings
@@ -133,6 +129,16 @@ vnoremap <C-s> <ESC>:update<CR>gv
 " Map ctrlp to ^T
 let g:ctrlp_map = '<C-t>'
 
+" Make F1 exit from help instead of entering it
+noremap <F1> :call MapF1()<CR>
+inoremap <F1> <Nop>
+
+function MapF1()
+  if &buftype == "help"
+    quit
+  endif
+endfunction
+
 " Make <F5> toggle the background
 function ToggleBackground()
     let &background = ( &background == "dark"? "light" : "dark" )
@@ -147,6 +153,21 @@ vnoremap <F5> <ESC>:call ToggleBackground()<CR>gv
 
 " :Trim strips trailing whitespace from all lines
 command Trim %substitute/\s\+$//
+
+" Handy keys for setting the tabstop
+" to 2 spaces, 4 spaces, or hard tabs
+noremap <F2> :set sw=2 et<CR>
+inoremap <F2> <C-\><C-O>:set sw=2 et<CR>
+vnoremap <F2> <ESC>:set sw=2 et<CR>gv
+
+noremap <F4> :set sw=4 et<CR>
+inoremap <F4> <C-\><C-O>:set sw=4 et<CR>
+vnoremap <F4> <ESC>:set sw=4 et<CR>gv
+
+noremap <F8> :set sw=8 et<CR>
+inoremap <F8> <C-\><C-O>:set sw=8 noet<CR>
+vnoremap <F8> <ESC>:set sw=8 noet<CR>gv
+
 
 """"""""
 " Filetypes
@@ -164,6 +185,7 @@ autocmd filetypedetect BufNewFile,BufRead *.coffee setlocal filetype=coffee
 autocmd filetypedetect BufNewFile,BufRead *.ll setlocal filetype=llvm
 autocmd filetypedetect BufNewFile,BufRead *.mako setlocal filetype=mako
 autocmd filetypedetect BufNewFile,BufRead *.md setlocal filetype=markdown
+autocmd filetypedetect BufNewFile,BufRead go.mod setlocal filetype=gomod
 autocmd filetypedetect BufNewFile,BufRead Vagrantfile setlocal filetype=ruby
 
 " Auto-format Go code on save
@@ -172,6 +194,9 @@ autocmd BufWritePre *.go call go#fmt#Format(-1)
 
 " Enable :Man
 runtime ftplugin/man.vim
+
+" Enable vimwiki ftplugin
+autocmd filetype vimwiki runtime ftplugin/vimwiki.vim
 
 " Disable modelines in git commit messages.
 " Limit width to 72 charaters.
@@ -196,6 +221,9 @@ highlight link pythonFunction Normal
 highlight link pythonDecorator Normal
 highlight link pythonDottedName Normal
 
+" make color column stand out less
+highlight ColorColumn ctermbg=darkgrey guibg=darkgrey
+
 " In HTML, don't stylize the contents of <em> and <a> and the like.
 let g:html_no_rendering = 1
 
@@ -206,3 +234,12 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
+if has('gui_running')
+    " better font and color choices
+    set guifont=Go\ Mono\ 10
+    colorscheme solarized
+
+    " no toolbar
+    set toolbar=
+end

@@ -32,14 +32,20 @@ REPORTTIME=10
 # Print exit status if non-zero
 setopt printexitvalue
 
+### Other options
+
+setopt interactivecomments # allow comments in interactive shells
+setopt autocontinue # resume disowned jobs
+setopt notify # report job status immediately
+
 ### Path
 # Have to set PATH here rather than .zshenv or it will be
 # overwritten by /etc/profile
 
-PATH=$PATH:$HOME/bin:$HOME/go/bin
-PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
+path+=(~/bin ~/go/bin)
+path+=(/usr/local/sbin /usr/sbin /sbin)
 
-MANPATH=$MANPATH:$HOME/share/man
+manpath+=(~/share/man)
 
 ### Help
 unalias run-help
@@ -77,7 +83,9 @@ alias /=ls # right next to l
 alias j=jobs
 
 function p {
-	if [ -f "$1" ]; then
+	if [[ -z "$1" ]]; then
+		$PAGER
+	elif test -f "$1"; then
 		$PAGER "$1"
 	else
 		ls "$1"
@@ -107,6 +115,10 @@ alias ln='ln -i'
 # Use SI units
 alias df='df --si'
 alias du='du --si'
+
+# Use extended regular expressions
+alias grep='grep -E'
+alias sed='sed --regexp-extended'
 
 # Some sane defaults for sshfs
 alias sshfs='sshfs -o idmap=user,follow_symlinks,allow_root'
