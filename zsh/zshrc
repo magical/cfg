@@ -54,12 +54,17 @@ alias help=run-help
 
 ### Aliases
 
+# Remove any "helpful" aliases from /etc/profile.d
+unalias ls 2>/dev/null
+unalias ll 2>/dev/null
+unalias which 2>/dev/null
+
 # Basic ls options: all, escape, classify, version sort, SI units, color
 function ls { command ls -AbFv --si --color=auto "$@" }
 
 # Long options: long, all, classify, version sort, SI units, color
 # Run through the pager
-function ll { command ls -l -AFv --si --color=always "$@" | $PAGER }
+function ll { command ls -l -AFv --si --color=always "$@" | less -FR }
 
 # Tree: color, classify
 function tree { command tree -CF "$@" }
