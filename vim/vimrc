@@ -187,6 +187,7 @@ autocmd filetypedetect BufNewFile,BufRead *.mako setlocal filetype=mako
 autocmd filetypedetect BufNewFile,BufRead *.md setlocal filetype=markdown
 autocmd filetypedetect BufNewFile,BufRead go.mod setlocal filetype=gomod
 autocmd filetypedetect BufNewFile,BufRead Vagrantfile setlocal filetype=ruby
+autocmd filetypedetect BufNewFile,BufRead *.cl setlocal filetype=opencl
 
 " Auto-format Go code on save
 let g:go_fmt_command = "goimports"
@@ -206,6 +207,7 @@ autocmd BufRead COMMIT_EDITMSG setlocal nomodeline textwidth=72
 " and Makefiles
 autocmd filetype c setlocal noexpandtab shiftwidth=8
 autocmd filetype cpp setlocal noexpandtab shiftwidth=8
+autocmd filetype opencl setlocal noexpandtab shiftwidth=8
 autocmd filetype go setlocal noexpandtab shiftwidth=8
 autocmd filetype javascript setlocal noexpandtab shiftwidth=8
 autocmd filetype make setlocal noexpandtab shiftwidth=8
