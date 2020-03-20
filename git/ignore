@@ -1,4 +1,5 @@
 .*.swp
+.sw[pon]
 .*.un~
 *.pyc
 tags
