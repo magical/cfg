@@ -201,7 +201,8 @@ autocmd filetype vimwiki runtime ftplugin/vimwiki.vim
 
 " Disable modelines in git commit messages.
 " Limit width to 72 charaters.
-autocmd BufRead COMMIT_EDITMSG setlocal nomodeline textwidth=72
+" Move the cursor to the first line.
+autocmd BufRead COMMIT_EDITMSG setlocal nomodeline textwidth=72 | 1
 
 " Use hard tabs in C-based languages
 " and Makefiles
