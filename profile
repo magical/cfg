@@ -1,5 +1,7 @@
 export EDITOR=vim
 export PAGER=less
+export MANWIDTH=80
+
 export GOPATH=$HOME/go
 export LD_LIBRARY_PATH=$HOME/local/lib
 export XDG_CONFIG_HOME=$HOME/cfg
