@@ -28,3 +28,5 @@
 	default = current
 [transfer]
 	fsckObjects = true
+[init]
+	defaultBranch = main
