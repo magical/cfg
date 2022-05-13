@@ -152,7 +152,7 @@ inoremap <F5> <C-\><C-O>:call ToggleBackground()<CR>
 vnoremap <F5> <ESC>:call ToggleBackground()<CR>gv
 
 " :Trim strips trailing whitespace from all lines
-command Trim %substitute/\s\+$//
+command -range=% Trim <line1>,<line2>substitute/\s\+$//
 
 " Handy keys for setting the tabstop
 " to 2 spaces, 4 spaces, or hard tabs
