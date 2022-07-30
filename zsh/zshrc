@@ -140,7 +140,11 @@ disable r
 function tmux { command tmux -f "$XDG_CONFIG_HOME/tmux/tmux.conf" "$@" }
 function mocp { command mocp -M "$XDG_CONFIG_HOME/moc" "$@" }
 
-### Window titles
+### Window titles and prompt
+
+# Default prompt: hostname (status)%
+# Usually overridden in ./local with a colourful version
+prompt='%m%(0?.. (%?%))%# '
 
 function title() {
 	case $TERM in
