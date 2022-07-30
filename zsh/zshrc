@@ -109,6 +109,7 @@ function e {
 function cd { builtin cd "$@" && ls }
 function qcd { builtin cd "$@" } # quiet cd
 function mkcd { mkdir "$1" && cd "$1" }
+function cmkdir { mkdir "$1" && cd "$1" }
 
 # Make these less dangerous
 # Also let rm delete empty directories
