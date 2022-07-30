@@ -13,9 +13,9 @@ zstyle ':completion:*' completer _complete _ignored _files
 
 HISTFILE=$HOME/var/zsh/history
 
-# Keep and read 1e5 lines of history.
-SAVEHIST=100000
-HISTSIZE=100000
+# Keep and read 1e6 lines of history.
+SAVEHIST=1000000
+HISTSIZE=1000000
 
 # Append to the history file immediately after each command,
 # instead of when the shell exits.
