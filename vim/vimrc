@@ -219,19 +219,22 @@ autocmd filetype yaml setlocal expandtab shiftwidth=2
 """"""""
 " Colors
 
-highlight link pythonImport Keyword
-highlight link pythonFunction Normal
-highlight link pythonDecorator Normal
-highlight link pythonDottedName Normal
-
-" make color column stand out less
-highlight ColorColumn ctermbg=darkgrey guibg=darkgrey
-
 " In HTML, don't stylize the contents of <em> and <a> and the like.
 let g:html_no_rendering = 1
 
+" make color column stand out less
+highlight ColorColumn ctermbg=darkgrey guibg=darkgrey
+autocmd ColorScheme * highlight ColorColumn ctermbg=darkgrey guibg=darkgrey
+
+autocmd ColorScheme * highlight link pythonImport Keyword
+autocmd ColorScheme * highlight link pythonFunction Normal
+autocmd ColorScheme * highlight link pythonDecorator Normal
+autocmd ColorScheme * highlight link pythonDottedName Normal
+
 " Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
