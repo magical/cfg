@@ -264,10 +264,14 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+let g:solarized_termcolors = 256
+colorscheme solarized
+set background=dark
+
 if has('gui_running')
     " better font and color choices
     set guifont=Go\ Mono\ 10
-    colorscheme solarized
+    "colorscheme solarized
 
     " no toolbar
     set toolbar=
