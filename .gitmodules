@@ -4,6 +4,9 @@
 [submodule "vim/bundle/ctrlp"]
 	path = vim/bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim
+[submodule "vim/bundle/dracula"]
+	path = vim/bundle/dracula
+	url = https://github.com/dracula/vim
 [submodule "vim/bundle/indentwise"]
 	path = vim/bundle/indentwise
 	url = https://github.com/jeetsukumaran/vim-indentwise
