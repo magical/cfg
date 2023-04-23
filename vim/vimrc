@@ -45,7 +45,10 @@ set laststatus=2
 set ruler
 
 " Show a line at the 80-character mark
-set colorcolumn=80
+" Only in gvim because the terminal implementation is kinda ugly
+if has('gui_running')
+    set colorcolumn=80
+end
 
 " Make tabs and non-breaking spaces visible.
 " Tabs will appear as »-------.
