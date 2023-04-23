@@ -189,6 +189,9 @@ autocmd filetypedetect BufNewFile,BufRead go.mod setlocal filetype=gomod
 autocmd filetypedetect BufNewFile,BufRead Vagrantfile setlocal filetype=ruby
 autocmd filetypedetect BufNewFile,BufRead *.cl setlocal filetype=opencl
 
+autocmd BufNewFile,BufRead ~/riscv/*.s           setlocal filetype=riscv
+autocmd BufNewFile,BufRead ~/src/riscv-utils/*.s setlocal filetype=riscv
+
 " Auto-format Go code on save
 let g:go_fmt_command = "goimports"
 autocmd BufWritePre *.go call go#fmt#Format(-1)
@@ -230,6 +233,12 @@ autocmd ColorScheme * highlight link pythonImport Keyword
 autocmd ColorScheme * highlight link pythonFunction Normal
 autocmd ColorScheme * highlight link pythonDecorator Normal
 autocmd ColorScheme * highlight link pythonDottedName Normal
+
+" vimCommentString is the only way to access violet from the solarized palette
+autocmd ColorScheme solarized highlight link riscvLocalLabel vimCommentString
+autocmd ColorScheme solarized highlight link riscvAnonLabel vimCommentString
+
+autocmd ColorScheme solarized highlight riscvInsn ctermfg=133
 
 " Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
