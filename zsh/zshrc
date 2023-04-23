@@ -62,9 +62,9 @@ unalias which 2>/dev/null
 # Basic ls options: all, escape, classify, version sort, SI units, color
 function ls { command ls -AbFv --si --color=auto "$@" }
 
-# Long options: long, all, classify, version sort, SI units, color
+# Long options: long, all, classify, version sort, ignore parent dir, SI units, color
 # Run through the pager
-function ll { command ls -l -AFv --si --color=always "$@" | less -FR }
+function ll { command ls -l -aFv --si --ignore .. --color=always "$@" | less -FR }
 
 # Tree: color, classify
 function tree { command tree -CF "$@" }
