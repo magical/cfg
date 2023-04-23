@@ -52,6 +52,12 @@ set colorcolumn=80
 " Non-breaking spaces will appear as a middle dot.
 set list listchars=tab:»-,nbsp:·
 
+" Indent wrapped lines
+" Soft-wrapped lines will copy the indentation of
+" the previous line instead of appearing at column 0.
+set breakindent
+set showbreak=»
+
 " Options for automatic formatting.
 " tc: wrap text and comments at textwidth
 " l: don't break lines that are already past textwidth
