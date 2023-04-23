@@ -112,6 +112,9 @@ set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 noremap <C-p> :tabprev<cr>
 noremap <C-n> :tabnext<cr>
 
+" Make :tabv open a file in read-only mode in a new tab
+cabbrev tabv tab sview +setlocal\ nomodifiable
+
 " Make Y yank to the end of the line,
 " for consistency with C and D.
 noremap Y y$
