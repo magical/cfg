@@ -24,24 +24,25 @@ syn case ignore
 " 3. When multiple Match or Region items start in the same position, the item defined last has priority.
 
 " storage types
-syn match riscvType "\.ascii"
-syn match riscvType "\.asciz"
-syn match riscvType "\.string"
-syn match riscvType "\.space"
+syn keyword riscvType .ascii
+syn keyword riscvType .asciz
+syn keyword riscvType .string
+syn keyword riscvType .space
 
-syn match riscvType "\.byte"
-syn match riscvType "\.hword"
-syn match riscvType "\.short"
-"syn match riscvType "\.int"
-syn match riscvType "\.word"
-syn match riscvType "\.long"
-syn match riscvType "\.dword"
-syn match riscvType "\.quad"
+syn keyword riscvType .byte
+syn keyword riscvType .half
+syn keyword riscvType .short
+"syn keyword riscvType .int
+syn keyword riscvType .word
+syn keyword riscvType .long
+syn keyword riscvType .dword
+syn keyword riscvType .quad
 
-syn match riscvType "\.float"
-syn match riscvType "\.single"
-syn match riscvType "\.double"
+syn keyword riscvType .float
+syn keyword riscvType .single
+syn keyword riscvType .double
 
+syn keyword riscvDot  .
 
 " Partial list of register symbols
 syn keyword riscvReg	zero
@@ -80,8 +81,15 @@ syn keyword riscvInsn lr.w lr.d sc.w sc.d
 syn keyword riscvInsn amoswap.w amoadd.w amoand.w amoor.w amoxor.w amomax.w amomin.w amomaxu.w amominu.w
 syn keyword riscvInsn amoswap.d amoadd.d amoand.d amoor.d amoxor.d amomax.d amomin.d amomaxu.d amominu.d
 
+syn match riscvMacroVar		/\\[a-z_][a-z0-9_]*\>/
+syn match riscvMacroSpecial	/\\()/
+syn match riscvMacroSpecial	/\\@/
+syn keyword riscvMacroOption reg vararg
+
 syn match riscvIdentifier	/\<[a-z_][a-z0-9_]*\>/
-syn match riscvLabel		/\<[a-z_][a-z0-9_]*:/he=e-1
+syn match riscvLabel		/^\s*\zs[a-z_][a-z0-9_]*:/he=e-1
+
+syn case match
 
 " Various #'s as defined by GAS ref manual sec 3.6.2.1
 " Technically, the first decNumber def is actually octal,
@@ -97,7 +105,7 @@ syn match riscvEscape "\\[0-7]\{1,3}" contained
 
 syn region riscvString		start=/"/ end=/"/ skip=/\\"/ contains=riscvEscape
 
-" TODO: characters
+" TODO: riscvCharacter
 
 
 syn keyword riscvTodo		contained TODO XXX FIXME
@@ -115,54 +123,40 @@ syn region riscvComment		start="//" end="$" keepend contains=riscvTodo
 " Line comment characters depend on the target architecture and command line
 " options and some comments may double as logical line number directives or
 " preprocessor commands. This situation is described at
-" http://sourceware.org/binutils/docs-2.22/as/Comments.html
-" Some line comment characters have other meanings for other targets. For
-" example, .type directives may use the `@' character which is also an ARM
-" comment marker.
-" As a compromise to accommodate what I arbitrarily assume to be the most
-" frequently used features of the most popular architectures (and also the
-" non-GNU assembly languages that use this syntax file because their asm files
-" are also named *.asm), the following are used as line comment characters:
-syn match riscvComment		"[#].*" contains=riscvTodo
+" http://sourceware.org/binutils/docs-2.40/as/Comments.html
+"
+" RISC-V only uses # as a comment marker, and does not recognize any other
+" characters (such as ; @ ! |) as comments.
+syn match riscvComment		"#.*" contains=riscvTodo
 
-" Side effects of this include:
-" - When `;' is used to separate statements on the same line (many targets
-"   support this), all statements except the first get highlighted as
-"   comments. As a remedy, remove `;' from the above.
-" - ARM comments are not highlighted correctly. For ARM, uncomment the
-"   following two lines and comment the one above.
-"syn match riscvComment		"@.*" contains=riscvTodo
-"syn match riscvComment		"^#.*" contains=riscvTodo
+syn case ignore
 
-" Advanced users of specific architectures will probably want to change the
-" comment highlighting or use a specific, more comprehensive syntax file.
+syn keyword riscvInclude	.include
+syn keyword riscvCond		.if
+syn keyword riscvCond		.else
+syn keyword riscvCond		.endif
+syn keyword riscvMacro		.macro
+syn keyword riscvMacro		.endm
 
-syn match riscvInclude		"\.include"
-syn match riscvCond		"\.if"
-syn match riscvCond		"\.else"
-syn match riscvCond		"\.endif"
-syn match riscvMacro		"\.macro"
-syn match riscvMacro		"\.endm"
+syn case match
 
 " Assembler directives start with a '.' and may contain upper case (e.g.,
 " .ABORT), numbers (e.g., .p2align), dash (e.g., .app-file) and underscore in
-" CFI directives (e.g., .cfi_startproc). Only match at the start of a line.
+" CFI directives (e.g., .cfi_startproc).
 "
-" This will also match labels starting " with '.', including the GCC
-" auto-generated '.L' labels.
-syn match riscvDirective	"^\s*\zs\.[A-Za-z][0-9A-Za-z-_]*"
+" Only match at the start of a line.
+"
+" The first character cannot be L as this denotes a local label.
+syn match riscvDirective	"^\s*\zs\.[A-KM-Za-z][0-9A-Za-z-_]*"
 
-" Match '.L' labels, overriding riscDirective
-syn match riscvLocalLabel	/\.L\k*/
+" Labels starting with .L are local labels (technically "local symbol names")
+syn match riscvLocalLabel	/\<\.L\k\+\>/
 
 " Anonymous labels are defined as label with a numeric name
 " and referenced with an 'f' or 'b' suffix.
 syn match riscvAnonLabel	/^\s*\zs[0-9]\+[$]\?:/he=e-1
-syn match riscvAnonLabel	"[0-9]\+[$]\?[fb]"
+syn match riscvAnonLabel	/\<[0-9]\+[$]\?[fb]\>/
 
-syn match riscvDot		/\<\.\>/
-
-syn case match
 
 " Define the default highlighting.
 " Only when an item doesn't have highlighting yet
@@ -191,6 +185,10 @@ hi def link riscvEscape		SpecialChar
 "hi def link riscvIdentifier	Identifier
 hi def link riscvIdentifier	Normal
 hi def link riscvType		Type
+
+hi def link riscvMacroVar	Identifier
+hi def link riscvMacroSpecial	riscvMacroVar
+hi def link riscvMacroOption	riscvMacroVar
 
 hi def link riscvLocalLabel	Label
 hi def link riscvAnonLabel	Label
