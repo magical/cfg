@@ -115,11 +115,6 @@ syn keyword riscvTodo		contained TODO XXX FIXME
 " GAS supports one type of multi line comments:
 syn region riscvComment		start="/\*" end="\*/" contains=riscvTodo
 
-" GAS (undocumentedly?) supports C++ style comments. Unlike in C/C++ however,
-" a backslash ending a C++ style comment does not extend the comment to the
-" next line (hence the syntax region does not define 'skip="\\$"')
-syn region riscvComment		start="//" end="$" keepend contains=riscvTodo
-
 " Line comment characters depend on the target architecture and command line
 " options and some comments may double as logical line number directives or
 " preprocessor commands. This situation is described at
