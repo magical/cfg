@@ -60,7 +60,7 @@ syn keyword riscvInsn sll[i] srl[i] sra[i]
 syn keyword riscvInsn j jal jalr jr ret call tail
 syn keyword riscvInsn beq bne blt[u] bgt[u] ble[u] bge[u]
 syn keyword riscvInsn beqz bnez bltz blez bgtz bgez
-syn keyword riscvInsn slt sltu slti sltui
+syn keyword riscvInsn slt sltu slti sltiu
 syn keyword riscvInsn seqz snez sltz sgtz
 syn keyword riscvInsn ecall ebreak
 
