@@ -19,6 +19,8 @@
 "     the standard style.
 "   - go_highlight_extra_types
 "     Highlights commonly used library types (io.Reader, etc.).
+"   - go_highlight_numeric_error
+"     Highlights invalid numeric literals.
 "   - go_highlight_space_tab_error
 "     Highlights instances of tabs following spaces.
 "   - go_highlight_trailing_whitespace_error
@@ -37,6 +39,9 @@ if !exists("go_highlight_chan_whitespace_error")
 endif
 if !exists("go_highlight_extra_types")
   let go_highlight_extra_types = 1
+endif
+if !exists("go_highlight_numeric_error")
+  let go_highlight_numeric_error = 1
 endif
 if !exists("go_highlight_space_tab_error")
   let go_highlight_space_tab_error = 1
@@ -136,6 +141,14 @@ syn region      goBlock             start="{" end="}" transparent fold
 syn region      goParen             start='(' end=')' transparent
 
 " Integers
+
+" matches anything that looks vaguely like a number.
+" overridden by later definitions
+if go_highlight_numeric_error != 0
+    syn match   goNumError          "\.\?\<\d\([PpEe][+-]\|[0-9A-Za-z_\.]\)*"
+endif
+hi def link     goNumError          Error
+
 syn match       goDecimalInt        "\<\d\(_\?\d\)*\([Ee][+-]\?\d\(_\?\d\)*\)\?\>\.\@!"
 syn match       goHexadecimalInt    "\<0[Xx]\(_\?\x\)\+\>\.\@!"
 syn match       goOctalInt          "\<0[Oo]\?\(_\?\o\)\+\>"
