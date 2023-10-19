@@ -137,13 +137,15 @@ syn region      goParen             start='(' end=')' transparent
 
 " Integers
 syn match       goDecimalInt        "\<\d\+\([Ee]\d\+\)\?\>"
-syn match       goHexadecimalInt    "\<0x\x\+\>"
-syn match       goOctalInt          "\<0\o\+\>"
+syn match       goHexadecimalInt    "\<0x\(_\?\x\)\+\>"
+syn match       goOctalInt          "\<0o\?\(_\?\o\)\+\>"
+syn match       goBinaryInt         "\<0b\(_\?[01]\)\+\>"
 syn match       goOctalError        "\<0\o*[89]\d*\>"
 
 hi def link     goDecimalInt        Integer
 hi def link     goHexadecimalInt    Integer
 hi def link     goOctalInt          Integer
+hi def link     goBinaryInt         Integer
 hi def link     Integer             Number
 
 " Floating point
