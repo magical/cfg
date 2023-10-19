@@ -149,11 +149,16 @@ hi def link     goBinaryInt         Integer
 hi def link     Integer             Number
 
 " Floating point
-syn match       goFloat             "\<\d\+\.\d*\([Ee][-+]\d\+\)\?\>"
-syn match       goFloat             "\<\.\d\+\([Ee][-+]\d\+\)\?\>"
-syn match       goFloat             "\<\d\+[Ee][-+]\d\+\>"
+syn match       goDecimalFloat      "\<\d\+\.\d*\([Ee][-+]\d\+\)\?\>"
+syn match       goDecimalFloat      "\<\.\d\+\([Ee][-+]\d\+\)\?\>"
+syn match       goDecimalFloat      "\<\d\+[Ee][-+]\d\+\>"
 
-hi def link     goFloat             Float
+syn match       goHexidecimalFloat  "\<0[Xx]\(_\?\x\)\+\.\(\x\(_\?\x\)*\)\?[Pp][-+]\?\d\(_\?\d\)*\>"
+syn match       goHexidecimalFloat  "\<0[Xx]\.\x\(_\?\x\)*[Pp][-+]\?\d\(_\?\d\)*\>"
+syn match       goHexidecimalFloat  "\<0[Xx]\(_\?\x\)\+[Pp][-+]\?\d\(_\?\d\)*\>"
+
+hi def link     goDecimalFloat      Float
+hi def link     goHexidecimalFloat  Float
 
 " Imaginary literals
 syn match       goImaginary         "\<\d\+i\>"
