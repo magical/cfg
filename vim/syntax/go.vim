@@ -136,8 +136,8 @@ syn region      goBlock             start="{" end="}" transparent fold
 syn region      goParen             start='(' end=')' transparent
 
 " Integers
-syn match       goDecimalInt        "\<\d\+\([Ee]\d\+\)\?\>"
-syn match       goHexadecimalInt    "\<0x\(_\?\x\)\+\>"
+syn match       goDecimalInt        "\<\d\+\([Ee]\d\+\)\?\>\.\@!"
+syn match       goHexadecimalInt    "\<0x\(_\?\x\)\+\>\.\@!"
 syn match       goOctalInt          "\<0o\?\(_\?\o\)\+\>"
 syn match       goBinaryInt         "\<0b\(_\?[01]\)\+\>"
 syn match       goOctalError        "\<0\o*[89]\d*\>"
@@ -149,16 +149,42 @@ hi def link     goBinaryInt         Integer
 hi def link     Integer             Number
 
 " Floating point
-syn match       goDecimalFloat      "\<\d\+\.\d*\([Ee][-+]\d\+\)\?\>"
-syn match       goDecimalFloat      "\<\.\d\+\([Ee][-+]\d\+\)\?\>"
-syn match       goDecimalFloat      "\<\d\+[Ee][-+]\d\+\>"
+" A bit tricky because a decimal float can start or end with '.' but it isn't an identifier character so \< and \> don't work
+" We use these patterns instead:
+"   \>\@!\.     matches a '.' if the preceding character isn't the end of a word
+"   \<\@!       matches if the next character isn't the start of a word
+"   \.\@1=\<\@! matches if we just matched a '.' and the next character starts a word
 
-syn match       goHexidecimalFloat  "\<0[Xx]\(_\?\x\)\+\.\(\x\(_\?\x\)*\)\?[Pp][-+]\?\d\(_\?\d\)*\>"
-syn match       goHexidecimalFloat  "\<0[Xx]\.\x\(_\?\x\)*[Pp][-+]\?\d\(_\?\d\)*\>"
-syn match       goHexidecimalFloat  "\<0[Xx]\(_\?\x\)\+[Pp][-+]\?\d\(_\?\d\)*\>"
+syn match       goDecimalFloat      "\<\d\(_\?\d\)*\.\(\d\(_\?\d\)*\)\?\([Ee][-+]\?\d\(_\?\d\)*\)\?\>"
+syn match       goDecimalFloat      "\<\d\(_\?\d\)*\.\<\@!"
+syn match       goDecimalFloat      "\>\@!\.\d\(_\?\d\)*\([Ee][-+]\?\d\+\)\?\>"
+
+" same as above but without underscores
+"syn match       goDecimalFloat      "\<\d\+\.\d*\([Ee][-+]\?\d\+\)\?\>"
+"syn match       goDecimalFloat      "\<\d\+\.\<\@!"
+"syn match       goDecimalFloat       "\>\@!\.\d\+\([Ee][-+]\?\d\+\)\?\>"
+
+"syn match       goDecimalFloat      "\(\<\d\+\.\|\>\@!\.\d\)\d*\([Ee][-+]\?\d\+\)\?\(\>\|\.\@1<=\<\@!\)"
+
+" Hex floats require both a prefix (0x) and a postfix (p±exponent)
+" so we don't have the same \<\> trouble as with decimal floats.
+"
+" The tricky part is ensuring that there is at least one digit and at most one dot.
+" we accomplish the former with a zero-width match and then proceed with a simple
+" pattern matching zero or more digits followed by an optional dot followed by zero or more digits.
+"syn match       goHexadecimalFloat  "\<0[Xx]\(.\?\x\)\@=\(_\?\x\)*\(\.\(\x\(_\?\x\)*\)\?\)\?[Pp][-+]\?\d\(_\?\d\)*\>"
+syn match       goHexadecimalFloat  "\v<0[Xx](.?\x)@=(_?\x)*(|\.(|\x(_?\x)*))[Pp][-+]?\d(_?\d)*>"
+
+" here is the same thing as 3 separate patterns for x+.x?, .x+, and x+
+"syn match       goHexadecimalFloat  "\<0[Xx]\(_\?\x\)\+\.\(\x\(_\?\x\)*\)\?[Pp][-+]\?\d\(_\?\d\)*\>"
+"syn match       goHexadecimalFloat  "\<0[Xx]\.\x\(_\?\x\)*[Pp][-+]\?\d\(_\?\d\)*\>"
+"syn match       goHexadecimalFloat  "\<0[Xx]\(_\?\x\)\+[Pp][-+]\?\d\(_\?\d\)*\>"
+
+" and here's a simpler pattern that doesn't support underscores between digits
+"syn match       goHexadecimalFloat "\<0[Xx]\(\x\+\.\|\.\x\|\x\)\x*[Pp][-+]\?\d+\>"
 
 hi def link     goDecimalFloat      Float
-hi def link     goHexidecimalFloat  Float
+hi def link     goHexadecimalFloat  Float
 
 " Imaginary literals
 syn match       goImaginary         "\<\d\+i\>"
