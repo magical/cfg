@@ -136,9 +136,9 @@ syn region      goBlock             start="{" end="}" transparent fold
 syn region      goParen             start='(' end=')' transparent
 
 " Integers
-syn match       goDecimalInt        "\<\d\+\([Ee]\d\+\)\?\>\.\@!"
-syn match       goHexadecimalInt    "\<0x\(_\?\x\)\+\>\.\@!"
-syn match       goOctalInt          "\<0o\?\(_\?\o\)\+\>"
+syn match       goDecimalInt        "\<\d\(_\?\d\)*\([Ee][+-]\?\d\(_\?\d\)*\)\?\>\.\@!"
+syn match       goHexadecimalInt    "\<0[Xx]\(_\?\x\)\+\>\.\@!"
+syn match       goOctalInt          "\<0[Oo]\?\(_\?\o\)\+\>"
 syn match       goBinaryInt         "\<0b\(_\?[01]\)\+\>"
 syn match       goOctalError        "\<0\o*[89]\d*\>"
 
