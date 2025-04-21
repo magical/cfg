@@ -217,6 +217,7 @@ autocmd filetype vimwiki runtime ftplugin/vimwiki.vim
 " Limit width to 72 charaters.
 " Move the cursor to the first line.
 autocmd BufRead COMMIT_EDITMSG setlocal nomodeline textwidth=72 | 1
+autocmd BufRead git-rebase-todo setlocal nomodeline | 1
 " Same for editing hunks in add -p
 autocmd BufRead addp-hunk-edit.diff 1
 
