@@ -176,10 +176,9 @@ noremap <F4> :set sw=4 et<CR>
 inoremap <F4> <C-\><C-O>:set sw=4 et<CR>
 vnoremap <F4> <ESC>:set sw=4 et<CR>gv
 
-noremap <F8> :set sw=8 et<CR>
+noremap <F8> :set sw=8 noet<CR>
 inoremap <F8> <C-\><C-O>:set sw=8 noet<CR>
 vnoremap <F8> <ESC>:set sw=8 noet<CR>gv
-
 
 """"""""
 " Filetypes
