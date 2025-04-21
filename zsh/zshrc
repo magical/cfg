@@ -2,6 +2,32 @@
 
 bindkey -e # emacs key bindings
 
+bindkey "$(tput khome)" beginning-of-line
+bindkey "$(tput kend)" end-of-line
+
+if [[ -n "${TMUX-}" ]]; then
+	# If we're in a tmux session, bind page up to
+	# activate tmux's history buffer, using -eu to make
+	# it feel seamless. also bind page down to do nothing,
+	# so that trying to scroll "past" the bottom doesn't
+	# leave junk in the terminal.
+	#
+	# These are zsh bindings rather than tmux bindings
+	# because we want running programs to be able to intercept
+	# page up/down as normal. We only need convenient scrollback
+	# when at the command prompt.
+	bindkey '\e[6~' noop
+	bindkey '\e[5~' pgup
+	zle -N pgup pgup
+	zle -N noop noop
+	function pgup {
+		# -u: start with the buffer back one page (same as C-b pageup)
+		# -e: exit the buffer when we scroll to the bottom
+		tmux copy-mode -eu
+	}
+	function noop { }
+fi
+
 ### Completion
 
 autoload -Uz compinit
